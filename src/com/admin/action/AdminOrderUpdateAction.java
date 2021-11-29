@@ -65,7 +65,7 @@ public class AdminOrderUpdateAction implements Action {
 		ActionForward forward = new ActionForward();
 		PrintWriter out = response.getWriter();
 		
-		if(nownores>0 && checkres>0) {
+		if(nownores>0) {
 			
 			// if(nownores>0) { // 발주승인 클릭, 현재재고 수량 수정이 성공했을 때
 				
@@ -81,6 +81,17 @@ public class AdminOrderUpdateAction implements Action {
 				forward.setRedirect(false);
 				forward.setPath("admin/order_confirm.jsp");
 			// }
+			
+		} else if(checkres>0) {
+			
+			List<OrderDTO> list = dao.getOrderList();
+			request.setAttribute("List", list);
+			
+			OrderContDTO cont = dao.getOrderCont(order_code);
+			request.setAttribute("Cont", cont);
+			
+			forward.setRedirect(false);
+			forward.setPath("admin/order_confirm.jsp");
 			
 		} else { // 발주 상태 수정 실패, 현재재고 수량 수정 실패했을 때
 			out.println("<script>");

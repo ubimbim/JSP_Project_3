@@ -23,7 +23,7 @@
 		<hr width="80%" color="gray" width="800">
 		<br>
 		
-		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/board_insert.do">
+		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/admin_board_writeOk.do">
 		
 			<table border="0" cellspacing="0" width="600">
 			
@@ -41,7 +41,7 @@
 					
 					<td> </td> <td> </td> <td> </td>
 					
-					<td align="right"> <input name="board_writer" value="admin"> </td>
+					<td align="right"> <input name="board_writer" value="${adminId }"> </td>
 				</tr>
 				
 				<tr>
@@ -56,7 +56,7 @@
 				
 				<tr>
 					<td>
-	 	 				<input class="form-control form-control-sm" id="formFileSm" type="file">
+	 	 				<input class="form-control form-control-sm" id="formFileSm" name="board_image" type="file">
  	 				</td>	
 				</tr>
 				
