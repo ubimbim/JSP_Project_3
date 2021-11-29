@@ -19,13 +19,9 @@ public class BoardListAction implements Action {
 		// shop_board 테이블에 있는 전체 레코드를 조회하여 해당 데이터를 view page로 이동시키는 비지니스 로직
 		// 페이징 작업
 		int rowsize = 10;		// 한 페이지당 보여질 게시물의 수
-		int block = 9; 		// 아래에 보여질 페이지의 최대 수 - 예) [1][2][3] / [4][5][6] / [7][8][9]
+		int block = 3; 		// 아래에 보여질 페이지의 최대 수 - 예) [1][2][3] / [4][5][6] / [7][8][9]
 		int totalRecord = 0;	// DB 상의 게시물의 전체 수
 		int allPage = 0; 		// 전체 페이지 수
-		
-		/*
-		 * if((totalRecord%rowsize) > 0) { allPage++; }
-		 */
 		
 		int page = 0;			// 현재 페이지 변수
 		
@@ -36,21 +32,21 @@ public class BoardListAction implements Action {
 		}
 		
 		// 해당 페이지에서 게시물 시작 번호
-		int startNo = (page*rowsize)-(rowsize-1); // 10-9=1
+		int startNo = (page*rowsize)-(rowsize-1);
 		
 		// 해당 페이지에서 게시물 끝 번호
-		int endNo = (page*rowsize); // 10
+		int endNo = (page*rowsize);
 		
 		// 해당 페이지의 시작 블럭
-		int startBlock = (((page-1)/block)*block)+1; // 1
+		int startBlock = (((page-1)/block)*block)+1;
 		
 		// 해당 페이지의 끝 블럭
-		int endBlock = (((page-1)/block)*block)+block; // 9
+		int endBlock = (((page-1)/block)*block)+block;
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
 		// DB상의 전체 게시물의 수를 확인하는 메소드 호출
-		totalRecord = dao.getBoardCount(); // 8
+		totalRecord = dao.getBoardCount();
 		
 		// 전체 게시물의 수를 한 페이지당 보여질 게시물의 수로 나누어 주어야 함
 		// 이 과정을 거치면 전체 페이지 수가 나오게 됨

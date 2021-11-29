@@ -22,44 +22,15 @@
 
 <style type="text/css">
 
-	.order {
-		display: flex;
-	}
-	
 	.ordertable {
-		flex: 1;
+		float: left;
+		width: 40%;
 	}
 	
 	.ordercontent {
-		flex: 1;
+		float: left;
+		width: 60%;
 	}
-
-	/* .order {
-		width: 100%;
-		height: 500px;
-		bordder: 3px solid red;
-		margin: 0px auto;
-		padding: 0px;
-		overflow: hidden;
-	} */
-
-	/* .ordertable {
-		width: 400px;
-		height: 400px;
-		line-height: 100px;
-		background-color: orange;
-		margin: 0 auto;
-		display: inline-block;
-	}
-	
-	.ordercontent {
-		width: 400px;
-		height: 400px;
-		line-height: 100px;
-		background-color: orange;
-		margin: 0 auto;
-		display: inline-block;
-	} */
 
 </style>
 </head>
@@ -71,7 +42,6 @@
 	
 	<c:set var="list" value="${List }" />
 	
-	<div class="order" style="width: 500px; height: 500px;"> 
 	<div class="ordertable">
 	
 		<input type="hidden" name="shopid" value="${shopId }">
@@ -167,7 +137,6 @@
 			</table>
 		</div>
 	</c:if>
-	</div>
 	
 </body>
 </html>
