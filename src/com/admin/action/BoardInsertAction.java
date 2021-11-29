@@ -59,7 +59,7 @@ public class BoardInsertAction implements Action {
 		
 		if(res>0) {
 			forward.setRedirect(true);
-			forward.setPath("board_list.do");
+			forward.setPath("admin_board_list.do");
 		} else {
 			out.println("<script>");
 			out.println("alert('공지사항 등록 실패')");
