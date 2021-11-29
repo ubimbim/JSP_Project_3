@@ -17,7 +17,6 @@ font-family: 'Nanum Gothic', sans-serif;
 	width : 850px;
 	margin-left : auto;
 	margin-right : auto;
-	
 }
 
 #menu ul li {
@@ -37,8 +36,6 @@ font-family: 'Nanum Gothic', sans-serif;
 	width: 150px;
 	font-size:15px;
 	font-weight: bold;
-	
-	
 }
 
 #shopname {
@@ -65,7 +62,6 @@ font-family: 'Nanum Gothic', sans-serif;
 		<li><a class="menuLink" onclick="yeouido()">Apple 여의도</a></li>
 	</ul>
 </div>
-
 <div align="center">
 <hr color="lightgray" width = "50%">
 <p id="shopname">Apple 가로수길</p>
@@ -78,8 +74,6 @@ font-family: 'Nanum Gothic', sans-serif;
 <hr color="lightgray" style="width:550px;"><br>
 <div id="map" style="width:500px; height:400px;"></div>
 </div>
-
-
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4285c890083d1f612cc44cfdd5d0dc4f"></script>
 <script>
@@ -219,8 +213,5 @@ function incheon() {
 
 
 </script>
-
-
-
 </body>
 </html>

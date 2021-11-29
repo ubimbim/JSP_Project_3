@@ -30,12 +30,12 @@ public class ShopOrderOkAction implements Action {
 		String pnum = request.getParameter("pnum");
 		int order_no = Integer.parseInt(request.getParameter("order_no"));
 		
-		/*
-		 * Date today = new Date(); SimpleDateFormat date = new
-		 * SimpleDateFormat("yyMMdd"); String date1 = date.format(today); String shopid1
-		 * = shopid.substring(0, 2).toUpperCase(); String order_code = date1+shopid1;
-		 * System.out.println(order_code);
-		 */
+//		Date today = new Date();
+//	    SimpleDateFormat date = new SimpleDateFormat("yyMMdd");
+//		String date1 = date.format(today);
+//		String shopid1 = shopid.substring(0, 2).toUpperCase();
+//		String order_code = date1+shopid1;
+//		System.out.println(order_code);
 		odao.insertOrderList(shopid, pnum, order_no);
 		
 		List<ShopDTO> list = dao.getShopList(shopid);
