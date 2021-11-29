@@ -13,7 +13,6 @@
 body{
 	background-color: #263343;
 }
-
 .top{
 	font-size:40px;
 	color:white;

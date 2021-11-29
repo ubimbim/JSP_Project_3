@@ -106,5 +106,7 @@
 	
 	</div>
 
+<jsp:include page="../include/shop_bottom.jsp" />
+
 </body>
 </html>

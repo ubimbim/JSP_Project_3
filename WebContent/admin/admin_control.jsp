@@ -10,14 +10,11 @@
 <title>Insert title here</title>
 <style type="text/css">	
 
-	td, tr {
+	td {
 		text-align: center;
 	}
 	tr:hover {
     background-color:#CCCCCC;
-	}
-	.na{
-	color:white;
 	}
 </style>
 </head>
@@ -25,14 +22,13 @@
 <jsp:include page="../include/admin_top.jsp" />
 
 	<div align="center">
-	&nbsp;&nbsp;&nbsp;
-	      <h2>매장별 남은 재고 관리</h2>
+	      <h1>3-1)매장별 재고관리 페이지(남은수량10개이하리스트)</h1>
 	   <br>
 
 	<table bgcolor="E0E0E0" border="1" cellspacing="0" width="65%">
 	      <tr bgcolor="#263343">
-	         <th class = na>매장이름</th> <th class = na>상품 번호</th>
-	          <th class = na>상품 이름</th> <th class = na>남은 수량</th>
+	         <th>매장이름</th> <th>상품 번호</th>
+	          <th>상품 이름</th> <th>남은 수량</th>
 	      </tr>
 	      
 	      <c:set var="list" value="${productcontrol }" />
@@ -60,8 +56,6 @@
 	   
 	   </table>
 	</div>
-	
-	<jsp:include page="../include/shop_bottom.jsp" />
 
 </body>
 </html>

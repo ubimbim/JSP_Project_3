@@ -12,8 +12,8 @@
 <jsp:include page="../include/admin_top.jsp" />
 	
 	<div align="center">
-		&nbsp;&nbsp;&nbsp;
-	      <h2>상품 수정</h2>
+	
+	      <h3>상품 수정 폼 페이지</h3>
 	      
 	   <br>
 	   
@@ -22,7 +22,7 @@
 	      <c:set var="dto" value="${productDto}" />
 	 
 	      
-	      <table bgcolor="E0E0E0" border="1" cellspacing="0" width="500"> 
+	      <table bgcolor="E0E0E0" border="1" cellspacing="0" width="600"> 
 	            
 	          <tr>
 	            <th>상품 이미지</th>
@@ -38,7 +38,7 @@
 	         </tr>
 	         
 	         <tr>
-	            <th>상품 번호 </th>
+	            <th>상품 번호</th>
 	            <td> <input name="pnum"
 	                      value="${dto.getPnum() }"> </td>
 	         </tr>
@@ -70,8 +70,6 @@
 	   </form>
 	
 	</div>
-	
-<jsp:include page="../include/shop_bottom.jsp" />
 
 </body>
 </html>
