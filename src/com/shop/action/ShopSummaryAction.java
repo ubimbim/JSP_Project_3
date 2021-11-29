@@ -31,7 +31,7 @@ public class ShopSummaryAction implements Action {
 		SalesDAO dao = SalesDAO.getInstance();
 		
 		// select all store's sales list
-		int[] shopsales = dao.shopsalesweek(week[0], week[6]);
+		ArrayList<Integer> shopsales = dao.shopsalesweek(week[0], week[6]);
 		
 		// select all store's productsales list
 		int[] prodsales = dao.prodsalesweek(week[0], week[6]);
@@ -42,11 +42,11 @@ public class ShopSummaryAction implements Action {
 		// Store name order
 		// garosu / gimpo / hongdae / incheon / yeouido
 		// Get Hashmap data<date, salesincome> in last week.
-		HashMap<String, Integer> garosuweek = dao.weekSales(week[0], week[6], "garosu");
-		HashMap<String, Integer> gimpoweek = dao.weekSales(week[0], week[6], "gimpo");
-		HashMap<String, Integer> hongdaeweek = dao.weekSales(week[0], week[6], "hongdae");
-		HashMap<String, Integer> incheonweek = dao.weekSales(week[0], week[6], "incheon");
-		HashMap<String, Integer> yeouidoweek = dao.weekSales(week[0], week[6], "yeouido");
+		HashMap<String, Integer> garosuweek = dao.weekSales(week[0], "garosu");
+		HashMap<String, Integer> gimpoweek = dao.weekSales(week[0], "gimpo");
+		HashMap<String, Integer> hongdaeweek = dao.weekSales(week[0], "hongdae");
+		HashMap<String, Integer> incheonweek = dao.weekSales(week[0], "incheon");
+		HashMap<String, Integer> yeouidoweek = dao.weekSales(week[0], "yeouido");
 		int[] garosu = new int[7];
 		int[] gimpo = new int[7];
 		int[] hongdae = new int[7];
@@ -59,6 +59,7 @@ public class ShopSummaryAction implements Action {
 			}else {
 				garosu[i] = 0;
 			}
+		
 			if(gimpoweek.get(week[i])!=null) {
 				gimpo[i] = gimpoweek.get(week[i]);
 			}else {
@@ -74,7 +75,7 @@ public class ShopSummaryAction implements Action {
 			if(incheonweek.get(week[i])!=null) {
 				incheon[i] = incheonweek.get(week[i]);
 			}else {
-				incheon[i] = 0;
+				garosu[i] = 0;
 			}
 		
 			if(yeouidoweek.get(week[i])!=null) {
@@ -83,13 +84,13 @@ public class ShopSummaryAction implements Action {
 				yeouido[i] = 0;
 			}
 		}
-		System.out.println(garosu[0]+garosu[1]+garosu[2]+garosu[3]+garosu[4]+garosu[5]+garosu[6]);
 		request.setAttribute("garosu", garosu);
 		request.setAttribute("gimpo", gimpo);
 		request.setAttribute("hongdae", hongdae);
 		request.setAttribute("incheon", incheon);
 		request.setAttribute("yeouido", yeouido);
-		
+		System.out.println(garosu[0]+","+garosu[2]+","+garosu[3]+","+garosu[4]+","+garosu[5]+garosu[1]);
+		System.out.println(hongdae);
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);

@@ -67,11 +67,7 @@ font-family: 'Nanum Gothic', sans-serif;
 </div>
 
 <div align="center">
-<<<<<<< Updated upstream
 <hr color="lightgray" width = "50%">
-=======
-<hr color="lightgray" align = "center" width = "50%">
->>>>>>> Stashed changes
 <p id="shopname">Apple 가로수길</p>
 <div id="info" align="center">
 <p><img src="../images/location.png" width="18" height="18"> 서울 강남구 가로수길 43 (우)06028</p>

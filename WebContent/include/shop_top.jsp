@@ -194,7 +194,7 @@ body{
 		<li><a class="cate_a" href="<%=request.getContextPath() %>/shop_summary.do">매  출</a>
 			<ul class="sub">
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_summary.do">주간 매출</a></li>
-				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_summary_check.do">매장별 매출</a></li>
+				<li> <a class="cate_a" href="">매장별 매출</a></li>
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_report.do">매출 보고</a></li>
 			</ul>
 		</li>

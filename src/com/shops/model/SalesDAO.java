@@ -316,23 +316,19 @@ public class SalesDAO {
 		return prodsales;
 	}	// prodsales() 메서드 end
 	
-	public HashMap<String, Integer> weekSales(String sdate, String edate, String shopid) {
+	public HashMap<String, Integer> weekSales(String date, String shopid) {
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		
 		try {
 			openConn();
 			
-			sql = "select sales_date, NVL(sum(sales_no*price), 0) as total " + 
-					"from sales join prod on sales.pname = prod.pname " + 
-					"where sales_date between to_date(? , 'YYYY/MM/DD') " + 
-					"and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') " + 
-					"and shop_id = ? " + 
-					"group by sales.sales_date "
-					+ "order by sales_date ";
+			sql = "select sales_date, NVL(sum(sales_no*price), 0) as total "
+					+ "from sales join prod on sales.pname = prod.pname "
+					+ "where sales_date >= ? and shop_id = ? "
+					+ "group by sales.sales_date ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sdate);
-			pstmt.setString(2, edate);
-			pstmt.setString(3, shopid);
+			pstmt.setString(1, date);
+			pstmt.setString(2, shopid);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -345,12 +341,12 @@ public class SalesDAO {
 		return result;
 	}
 	
-	public int[] shopsalesweek(String sdate, String edate) {
-		int[] shopsales = new int[5];
-		String[] shop = {"garosu", "gimpo", "hongdae", "incheon", "yeouido"};
+	public ArrayList<Integer> shopsalesweek(String sdate, String edate) {
+		ArrayList<Integer> shopsales = new ArrayList<>();
+		
 		try {
 			openConn();
-			sql = "select s.shop_id, sum(price*s.sales_no)as total " + 
+			sql = "select sum(price*s.sales_no)as total " + 
 					"from prod p join sales s " + 
 					"on p.pname = s.pname " + 
 					"where sales_date between ? and ? " + 
@@ -362,11 +358,7 @@ public class SalesDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				for(int i=0; i<=4; i++) {
-					if(rs.getString(1).equals(shop[i])) {
-						shopsales[i] = rs.getInt(2);
-					}
-				}
+				shopsales.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
