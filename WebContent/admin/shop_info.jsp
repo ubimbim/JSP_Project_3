@@ -63,9 +63,8 @@ font-family: 'Nanum Gothic', sans-serif;
 		<li><a class="menuLink" onclick="yeouido()">Apple 여의도</a></li>
 	</ul>
 </div>
-
-<div align="center">
 <hr color="lightgray" width = "50%">
+<div align="center">
 <p id="shopname">Apple 가로수길</p>
 <div id="info" align="center">
 <p><img src="../images/location.png" width="18" height="18"> 서울 강남구 가로수길 43 (우)06028</p>

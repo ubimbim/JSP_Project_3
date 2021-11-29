@@ -14,12 +14,16 @@
 <title>Insert title here</title>
 <style type="text/css">	
 
-	td {
+	td, tr {
 		text-align: center;
 	}
 	tr:hover {
     background-color:#CCCCCC;
 	}
+	.na{
+	color:white;
+	}
+	
 </style>
 </head>
 <body>
@@ -27,14 +31,15 @@
 	<jsp:include page="../include/admin_top.jsp" />
 
 	<div align="center">
-	      <h1>2-2)상품(제품) 리스트 페이지</h1>
+	&nbsp;&nbsp;&nbsp;
+	      <h2>상품 리스트</h2>
 	   <br>
 	   
 	   <table bgcolor="E0E0E0" border="1" cellspacing="0" width="65%">
 	      <tr bgcolor="#263343">
-	         <th>이미지</th> <th>상품번호</th>
-	          <th>상품 이름</th> <th>상품 가격</th>
-	           <th>수 정&nbsp;&nbsp;|&nbsp;&nbsp;삭 제</th>
+	         <th class = na>이미지</th> <th class = na>상품번호</th>
+	          <th class = na>상품 이름</th> <th class = na>상품 가격</th>
+	           <th class = na>수 정&nbsp;&nbsp;|&nbsp;&nbsp;삭 제</th>
 	      </tr>
 	      
 	      <c:set var="list" value="${productList }" />

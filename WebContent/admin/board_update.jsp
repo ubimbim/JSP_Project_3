@@ -33,23 +33,23 @@
 						<select name="board_code">
 							<c:if test="${dto.getBoard_code() == '공지' }">
 								<%-- 공지를 클릭한 경우 String board_code = "notice"; --%>
-								<option value="공지" selected>공지</option>
-								<option value="이슈">이슈</option>
-								<option value="행사">행사</option>
+								<option value="notice" selected>공지</option>
+								<option value="issue">이슈</option>
+								<option value="promotion">행사</option>
 							</c:if>
 							
 							<c:if test="${dto.getBoard_code() == '이슈' }">
 								<%-- 이슈를 클릭한 경우 String board_code = "issue"; --%>
-								<option value="공지">공지</option>
-								<option value="이슈" selected>이슈</option>
-								<option value="행사">행사</option>
+								<option value="notice">공지</option>
+								<option value="issue" selected>이슈</option>
+								<option value="promotion">행사</option>
 							</c:if>
 							
 							<c:if test="${dto.getBoard_code() == '행사' }">
 								<%-- 행사를 클릭한 경우 String board_code = "promotion"; --%>
-								<option value="공지">공지</option>
-								<option value="이슈">이슈</option>
-								<option value="행사" selected>행사</option>
+								<option value="notice" selected>공지</option>
+								<option value="issue">이슈</option>
+								<option value="promotion" selected>행사</option>
 							</c:if>
 						</select>
 					</td>
