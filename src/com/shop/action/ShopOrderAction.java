@@ -25,7 +25,7 @@ public class ShopOrderAction implements Action {
 		String shopid = (String)session.getAttribute("shopId");
 		
 		List<ShopDTO> list = dao.getShopList(shopid);
-		List<OrderDTO> orderlist = odao.getOrderList(shopid);
+		List<OrderDTO> orderlist = odao.getOrderShopList(shopid);
 		request.setAttribute("prodList", list);
 		request.setAttribute("orderlist", orderlist);
 		ActionForward forward = new ActionForward();

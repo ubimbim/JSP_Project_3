@@ -8,52 +8,32 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-
-.main_a{
-	text-decoration: none;
-	color: black;
+body{
+	background: aliceblue;
 }
-
 .big{
-	
+	margin-top: 400px;
 	margin: 0 auto;
-	
 	width: 900px;
-	height: 500px;
+	height: 300px;
 	
 	display: flex;
-	border: 1px solid #F0FFF0;
-	
+	border: 1px solid #000;
 	
 }
 
-.small1{
-	width: 450px;
-	height: 500px;
-	
-	flex-direction: row-reverse;
-	
-}
 .first{
 	
 	width: 450px;
-	height: 250px;
+	height: 300px;
 	
 	
-	border: 1px solid #F0FFF0;
-}
-.first1{
-	
-	width: 450px;
-	height: 250px;
-	
-	
-	border: 1px solid #F0FFF0;
+	background-color: #ff0;
 }
 
 .small{
 	width: 450px;
-	height: 500px;
+	height: 300px;
 	
 	flex-direction: row-reverse;
 	
@@ -61,54 +41,44 @@
 
 .second{
 	width: 450px;
-	height: 230px;
-	border: 1px solid #F0FFF0;
+	height: 150px;
+	background-color: aliceblue;
 }
 
 .third{
-	margin-top: 40px;
-	
 	width:450px;
-	height: 230px;
-	border: 1px solid #F0FFF0;
+	height: 150px;
+	background-color: skyblue;
 }
 
 </style>
 
 </head>
-<body style="background-color: aliceblue;">
+<body>
 
 <jsp:include page="../include/admin_top.jsp" />
 
-<div class="big" align="center">
-	
-	<div class="small1">
+<div class="big">
 	
 	<div class="first">
-		<a class="main_a" href="">품목별 주간 매출</a>
-	</div>
-	
-	<div align="center" class="first1">
-		<a class="main_a" href="">매출보고 내역</a>
-	</div>
-	
+		<a>ㅇㅇ</a>
 	</div>
 	
 	<div class="small">
 	
 		<div class="second">
-			<a class="main_a" href="">발주 요청</a>
+		
 		</div>
 		
 		<div class="third">
-			<a class="main_a" href="">공지사항</a>
+			
 		</div>
 		
 	</div>
 	
 </div>
 
-<jsp:include page="../include/shop_bottom.jsp" />
+
 
 </body>
 </html>

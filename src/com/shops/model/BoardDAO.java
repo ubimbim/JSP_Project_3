@@ -95,7 +95,7 @@ public class BoardDAO {
 			
 			openConn();
 			
-			sql = "select count(*) from board";
+			sql = "select count(*) from shop_board";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -122,10 +122,10 @@ public class BoardDAO {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		
 		// 해당 페이지에서의 시작 번호
-		int startNo = (page*rowsize)-(rowsize-1);
+		int startNo = (page*rowsize)-(rowsize-1); // 10-9 = 1
 		
 		// 해당 페이지에서의 마지막 번호
-		int endNo = (page*rowsize);
+		int endNo = (page*rowsize); // 1*10 = 10
 		
 		try {
 			

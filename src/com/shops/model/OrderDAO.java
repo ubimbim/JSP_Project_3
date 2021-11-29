@@ -93,7 +93,7 @@ public class OrderDAO {
 			
 			openConn();
 			
-			sql = "select * from shop_order order by order_date";
+			sql = "select * from shop_order order by order_code desc";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -242,50 +242,7 @@ public class OrderDAO {
 			
 			openConn();
 			
-			sql = "select * from shop_order where shop_id = ? order by order_date";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, shopid);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) { 
-				
-				OrderDTO dto = new OrderDTO();
-				
-				dto.setShop_id(rs.getString("shop_id"));
-				dto.setPnum(rs.getString("pnum"));
-				dto.setOrder_no(rs.getInt("order_no"));
-				dto.setOrder_date(rs.getString("order_date"));
-				dto.setOrder_check(rs.getString("order_check"));
-				dto.setOrder_code(rs.getString("order_code"));
-				dto.setOrder_comment(rs.getString("order_comment"));
-				dto.setOrderok_date(rs.getString("orderok_date"));
-				
-				list.add(dto);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeConn(rs, pstmt, con);
-		}
-		
-		return list;
-		
-	} // getOrderList() 메소드 end
-	// getOrderList() 메소드
-	// 로그인한 매장에 해당하는 발주테이블 전체 내역을 조회하는 메소드
-	public List<OrderDTO> getOrderList(String shopid) {
-		
-		List<OrderDTO> list = new ArrayList<OrderDTO>();
-		
-		try {
-			
-			openConn();
-			
-			sql = "select * from shop_order where shop_id = ? and "
-					+ "order_check = '요청' order by order_date";
+			sql = "select * from shop_order where shop_id = ? order by order_code desc";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, shopid);
@@ -327,10 +284,10 @@ public class OrderDAO {
 		
 		if(field.equals("all")) {
 			try {
-				sql = "select * from shop_order where shop_id = ? " + 
-						"and order_date between to_date(? , 'YYYY/MM/DD') " + 
-						"and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') " + 
-						"order by order_date";
+				sql = "select * from shop_order "
+						+ "where shop_id = ? "
+						+ "and order_date between ? and ? "
+						+ "order by order_date";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, shopid);
 				pstmt.setString(2, date1);
@@ -345,8 +302,7 @@ public class OrderDAO {
 					dto.setOrder_date(rs.getString("order_date"));
 					dto.setOrder_check(rs.getString("order_check"));
 					dto.setOrder_code(rs.getString("order_code"));
-					dto.setOrder_date(rs.getString("orderok_date"));
-					dto.setOrder_comment(rs.getString("order_comment"));
+					
 					list.add(dto);
 				}
 			} catch (SQLException e) {
@@ -357,8 +313,7 @@ public class OrderDAO {
 			try {
 				sql = "select * from shop_order "
 						+ "where shop_id = ? "
-						+ "and order_date between to_date(? , 'YYYY/MM/DD') " 
-						+ " and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+						+ "and order_date between ? and ?  "
 						+ "and order_check = '요청' "
 						+ "order by order_date";
 				pstmt = con.prepareStatement(sql);
@@ -375,8 +330,7 @@ public class OrderDAO {
 					dto.setOrder_date(rs.getString("order_date"));
 					dto.setOrder_check(rs.getString("order_check"));
 					dto.setOrder_code(rs.getString("order_code"));
-					dto.setOrder_date(rs.getString("orderok_date"));
-					dto.setOrder_comment(rs.getString("order_comment"));
+					
 					list.add(dto);
 				}
 			} catch (SQLException e) {
@@ -387,8 +341,7 @@ public class OrderDAO {
 			try {
 				sql = "select * from shop_order "
 						+ "where shop_id = ? "
-						+ "and order_date between to_date(? , 'YYYY/MM/DD') " 
-						+ " and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+						+ "and order_date between ? and ?  "
 						+ "and order_check = '발주승인' "
 						+ "order by order_date";
 				pstmt = con.prepareStatement(sql);
@@ -405,8 +358,7 @@ public class OrderDAO {
 					dto.setOrder_date(rs.getString("order_date"));
 					dto.setOrder_check(rs.getString("order_check"));
 					dto.setOrder_code(rs.getString("order_code"));
-					dto.setOrder_date(rs.getString("orderok_date"));
-					dto.setOrder_comment(rs.getString("order_comment"));
+					
 					list.add(dto);
 				}
 			} catch (SQLException e) {
@@ -417,8 +369,7 @@ public class OrderDAO {
 			try {
 				sql = "select * from shop_order "
 						+ "where shop_id = ? "
-						+ "and order_date between to_date(? , 'YYYY/MM/DD') " 
-						+ " and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+						+ "and order_date between ? and ?  "
 						+ "and order_check = '발주취소' "
 						+ "order by order_date";
 				pstmt = con.prepareStatement(sql);
@@ -435,8 +386,7 @@ public class OrderDAO {
 					dto.setOrder_date(rs.getString("order_date"));
 					dto.setOrder_check(rs.getString("order_check"));
 					dto.setOrder_code(rs.getString("order_code"));
-					dto.setOrder_date(rs.getString("orderok_date"));
-					dto.setOrder_comment(rs.getString("order_comment"));
+					
 					list.add(dto);
 				}
 			} catch (SQLException e) {
@@ -447,6 +397,8 @@ public class OrderDAO {
 		return list;
 	}	// getOrderSetList 메서드 end
 	
+	
+	
 	// insertOrderList() 메소드
 	public int insertOrderList(String shopid, String pnum, int order_no) {
 		int result = 0, count = 0;
@@ -454,18 +406,28 @@ public class OrderDAO {
 			try {
 				openConn();
 				
+				/*
+				 * sql = "select max(order_code) from shop_order where shop_id = ?";
+				 * 
+				 * pstmt = con.prepareStatement(sql); pstmt.setString(1, shopid); rs =
+				 * pstmt.executeQuery(); if(rs.next()) { count =
+				 * Integer.parseInt(rs.getString(1).substring(8)) + 1; }else { count = 1; }
+				 */
+				
 				sql = "select max(order_code) from shop_order";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
+					
 					if(rs.getString(1) != null) {
 						count = rs.getInt(1)+1;
-					}else {
+					} else {
 						count = 1;
 					}
+					
 				}
-
+				
 				sql = "insert into shop_order (shop_id, pnum, order_no, "
 						+ "order_date, order_code) " + 
 						"values (?, ?, ?, sysdate, ?)";
@@ -473,7 +435,7 @@ public class OrderDAO {
 				pstmt.setString(1, shopid);
 				pstmt.setString(2, pnum);
 				pstmt.setInt(3, order_no);
-				pstmt.setInt(4, count);
+				pstmt.setInt(4, count); // pstmt.setString(4, order_code+count);
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

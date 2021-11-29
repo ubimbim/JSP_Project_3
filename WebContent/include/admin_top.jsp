@@ -30,7 +30,6 @@ body{
 	background-color: #263343;
 	padding: 8px 12px;
 	
-	margin-bottom: 90px;
 }
 
 
@@ -166,13 +165,13 @@ body{
 	
 	<div class="logo">
 		<i class="fab fa-apple"></i>
-		<a class="cate_a" href="<%=request.getContextPath() %>/shop/shop_main.jsp">매장관리</a>
+		<a class="cate_a" href="">매장관리</a>
 	</div>
 	
 	<ul class="menu">
 		<li><a class="cate_a" href="<%=request.getContextPath() %>/admin/admin_main.jsp">Home</a></li>
 		
-		<li><a class="cate_a" href="<%=request.getContextPath() %>/admin/shop_info.jsp">매  장</a>
+		<li><a class="cate_a" href="">매  장</a>
 			<ul class="sub">
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/admin/shop_info.jsp">Shop Info</a></li>
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/admin_product_list.do">제품관리</a></li>
@@ -180,14 +179,14 @@ body{
 			</ul>
 		</li>
 		
-		<li><a class="cate_a" href="<%=request.getContextPath() %>/admin_product_control.do">재  고</a>
+		<li><a class="cate_a" href="">재  고</a>
 			<ul class="sub">
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/admin_product_control.do">재고관리</a></li>
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/admin_order.do">발주현황</a></li>
 			</ul>
 		</li>
 		
-		<li><a class="cate_a" href="<%=request.getContextPath() %>/admin_summary.do">매  출</a>
+		<li><a class="cate_a" href="">매  출</a>
 			<ul class="sub">
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/admin_summary.do">주간 매출</a></li>
 				<li> <a class="cate_a" href="">매장별 매출</a></li>
