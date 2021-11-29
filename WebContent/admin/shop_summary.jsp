@@ -46,7 +46,12 @@ header {
 </head>
 <body>
 <jsp:include page="../include/admin_top.jsp" />
-
+<c:set var="week" value="${week}" />
+<c:set var="garosu" value="${garosu}" />
+<c:set var="gimpo" value="${gimpo}" />
+<c:set var="hongdae" value="${hongdae}" />
+<c:set var="incheon" value="${incheon}" />
+<c:set var="yeouido" value="${yeouido}" />
 <header>
   <h1>매출 관리</h1>
   <nav>
@@ -73,13 +78,51 @@ header {
 		</tr>
 	</table>
 	<h3>매출보고 내역</h3>
-		<table width="300">
+		<table width="500">
 	      	<tr>
-	      		<th>상품명</th> <th>수 량</th><th>합 계</th><th>삭 제</th>
-	         <tr>
-	               <td> ${dto.getPname() } </td>
-	               <td> ${dto.getSales_no() } </td>
-	               <td> ${dto.getTotal() }</td>
+	      		<th>날 짜</th> <th>매장명</th><th>일 매출</th>
+	      	</tr>
+<c:set var="week" value="${week}" />
+<c:set var="garosu" value="${garosu}" />
+<c:set var="gimpo" value="${gimpo}" />
+<c:set var="hongdae" value="${hongdae}" />
+<c:set var="incheon" value="${incheon}" />
+<c:set var="yeouido" value="${yeouido}" />
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> Apple 가로수길 </td>
+		<td> ${garosu[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> 윌리스 김포공항 </td>
+		<td> ${gimpo[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> 프리스비 홍대점 </td>
+		<td> ${hongdae[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> 윌리스 인천터미널점 </td>
+		<td> ${incheon[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> Apple 여의도점 </td>
+		<td> ${yeouido[status.index] }</td>
+	</tr>
+</c:forEach>	        
 		</table>
 <script>
 let shopdata=[];
@@ -87,7 +130,35 @@ let shopdata=[];
 <c:forEach items="${sales}" var="sales">
 shopdata.push('${sales}');
 </c:forEach>
+let week=[];
+<c:forEach items="${week}" var="week">
+week.push('${week}');
+</c:forEach>
 
+let garosu=[];
+<c:forEach items="${garosu}" var="garosu">
+garosu.push('${garosu}');
+</c:forEach>
+
+let gimpo=[];
+<c:forEach items="${gimpo}" var="gimpo">
+gimpo.push('${gimpo}');
+</c:forEach>
+
+let hongdae=[];
+<c:forEach items="${hongdae}" var="hongdae">
+hongdae.push('${hongdae}');
+</c:forEach>
+
+let incheon=[];
+<c:forEach items="${incheon}" var="incheon">
+incheon.push('${incheon}');
+</c:forEach>
+
+let yeouido=[];
+<c:forEach items="${yeouido}" var="yeouido">
+yeouido.push('${yeouido}');
+</c:forEach>
 const ctx = document.getElementById('shopsales');
 const myChart = new Chart(ctx, {
     type: 'bar',
@@ -166,41 +237,7 @@ const pieChart = new Chart(pie, {
     }
 });
 
-let week=[];
-<c:set var="week" value="${week}" />
-<c:forEach items="${week}" var="week">
-week.push('${week}');
-</c:forEach>
 
-let garosu=[];
-<c:set var="garosu" value="${garosu}" />
-<c:forEach items="${garosu}" var="garosu">
-garosu.push('${garosu}');
-</c:forEach>
-
-let gimpo=[];
-<c:set var="gimpo" value="${gimpo}" />
-<c:forEach items="${gimpo}" var="gimpo">
-gimpo.push('${gimpo}');
-</c:forEach>
-
-let hongdae=[];
-<c:set var="hongdae" value="${hongdae}" />
-<c:forEach items="${hongdae}" var="hongdae">
-hongdae.push('${hongdae}');
-</c:forEach>
-
-let incheon=[];
-<c:set var="incheon" value="${incheon}" />
-<c:forEach items="${incheon}" var="incheon">
-incheon.push('${incheon}');
-</c:forEach>
-
-let yeouido=[];
-<c:set var="yeouido" value="${yeouido}" />
-<c:forEach items="${yeouido}" var="yeouido">
-yeouido.push('${yeouido}');
-</c:forEach>
 
 const con = document.getElementById('wholesales');
 const config = new Chart(con, {
@@ -208,33 +245,43 @@ const config = new Chart(con, {
 		  data: {
 				  labels: week,
 				  datasets: [
-				    {
-				      label: 'GAROSU',
-				      data: garosu,
-				      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				    },
-				    {
-				      label: 'GIMPO',
-				      data: gimpo,
-				      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-				    },
-				    {
-				      label: 'HONGDAE',
-				      data: hongdae,
-				      backgroundColor: 'rgba(255, 206, 86, 0.2)',
-				    },
-				    {
-				        label: 'INCHEON',
-				        data: incheon,
-				        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-				    },
-				    {
-				        label: 'YEOUIDO',
-				        data: yeouido,
-				        backgroundColor: 'rgba(255, 159, 64, 0.2)',
-				      },
-				  ]
-				},
+					    {
+					      label: 'GAROSU',
+					      data: garosu,
+					      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					      borderColor: 'rgba(255, 99, 132, 0.2)',
+					      borderWidth: 1,
+					    },
+					    {
+					      label: 'GIMPO',
+					      data: gimpo,
+					      backgroundColor: 'rgba(255, 205, 86, 0.2)',
+					      borderColor: 'rgba(54, 162, 235, 0.2)',
+					      borderWidth: 1,
+					    },
+					    {
+					      label: 'HONGDAE',
+					      data: hongdae,
+					      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+					      borderColor: 'rgba(255, 206, 86, 0.2)',
+					      borderWidth: 1,
+					    },
+					    {
+					        label: 'INCHEON',
+					        data: incheon,
+					        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+					        borderColor: 'rgba(75, 192, 192, 0.2)',
+						    borderWidth: 1,
+					    },
+					    {
+					        label: 'YEOUIDO',
+					        data: yeouido,
+					        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+					        borderColor: 'rgba(153, 102, 255, 0.2)',
+						    borderWidth: 1,
+					      },
+					  ]
+					},
 		  options: {
 		    plugins: {
 		      title: {

@@ -11,23 +11,21 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>Apple store sales summary here</title>
 <style>
-#container {
-	width: 1200px;
-	height: 600px;
-	display: flex;
-}
-#box-left {
-  flex: 2;
-  text-align: left;
-}
-#box-center {
-  flex: 2;
-  text-align: center;
-}
-#box-right {
-  flex: 1;
-  text-align: right;
-}
+
+	div.row {
+		width: 80%;
+		display: flex;
+	}
+	div.left {
+        width: 40%;
+        float: left;
+        border-width: 1px;
+        border-color: gray;
+	}
+	div.right {
+        width: 60%;
+        float: right;
+	}
 header {
   height: 75px;
   padding: 1rem;
@@ -57,31 +55,72 @@ header {
 </header>
 
 <div id="container" width="900" height="300">
-<div id="box-left">
-<canvas id="shopsales"></canvas>
-</div>
-<div id="box-center">
-<canvas id="wholesales"></canvas>
-</div>
-<div id="box-right">
-<canvas id="prodsales"></canvas>
-</div>
-</div>
-	<h2>Weekly Sales report</h2>
+<div class="row">
+		<div class="left">
+		<div align="center">
+		<canvas id="wholesales"></canvas>
+			<h2>Weekly Sales report</h2>
 	<table>
 		<tr>
 			<th>Date</th><th>Shop</th>
 		</tr>
 	</table>
 	<h3>매출보고 내역</h3>
-		<table width="300">
+		<table width="500">
 	      	<tr>
-	      		<th>상품명</th> <th>수 량</th><th>합 계</th><th>삭 제</th>
-	         <tr>
-	               <td> ${dto.getPname() } </td>
-	               <td> ${dto.getSales_no() } </td>
-	               <td> ${dto.getTotal() }</td>
+	      		<th>날 짜</th> <th>매장명</th><th>일 매출</th>
+	      	</tr>
+<c:set var="week" value="${week}" />
+<c:set var="garosu" value="${garosu}" />
+<c:set var="gimpo" value="${gimpo}" />
+<c:set var="hongdae" value="${hongdae}" />
+<c:set var="incheon" value="${incheon}" />
+<c:set var="yeouido" value="${yeouido}" />
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> Apple 가로수길 </td>
+		<td> ${garosu[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> 윌리스 김포공항 </td>
+		<td> ${gimpo[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> 프리스비 홍대점 </td>
+		<td> ${hongdae[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> 윌리스 인천터미널점 </td>
+		<td> ${incheon[status.index] }</td>
+	</tr>
+</c:forEach>
+<c:forEach var="week" items="${week}" varStatus="status">
+	<tr>
+		<td> ${week } </td>
+		<td> Apple 여의도점 </td>
+		<td> ${yeouido[status.index] }</td>
+	</tr>
+</c:forEach>	        
 		</table>
+		</div>
+		</div>
+	<div class="right">
+	<canvas id="shopsales"></canvas>
+	</div>
+</div>
+
+</div>
+
 <script>
 let shopdata=[];
 <c:set var="sales" value="${shopsales}" />
@@ -98,62 +137,18 @@ const myChart = new Chart(ctx, {
             label: 'WEEKLY SALES REPORT',
             data: shopdata,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
+            	'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-let proddata=[];
-<c:set var="psales" value="${prodsales}" />
-<c:forEach items="${psales}" var="sales">
-proddata.push('${sales}');
-</c:forEach>
-
-const pie = document.getElementById('prodsales');
-const pieChart = new Chart(pie, {
-    type: 'pie',
-    data: {
-        labels: ['iPad','iPhone','Airpods','AppleWatch'],
-        datasets: [{
-            label: '제품별 매출액',
-            data: proddata,
-            backgroundColor: [
-            	'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-            	'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+            	 'rgb(255, 99, 132)',
+                 'rgb(255, 205, 86)',
+                 'rgb(75, 192, 192)',
+                 'rgb(54, 162, 235)',
+                 'rgb(153, 102, 255)'
             ],
             borderWidth: 1
         }]
@@ -213,26 +208,36 @@ const config = new Chart(con, {
 				      label: 'GAROSU',
 				      data: garosu,
 				      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				      borderColor: 'rgba(255, 99, 132, 0.2)',
+				      borderWidth: 1,
 				    },
 				    {
 				      label: 'GIMPO',
 				      data: gimpo,
-				      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				      backgroundColor: 'rgba(255, 205, 86, 0.2)',
+				      borderColor: 'rgba(54, 162, 235, 0.2)',
+				      borderWidth: 1,
 				    },
 				    {
 				      label: 'HONGDAE',
 				      data: hongdae,
-				      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+				      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				      borderColor: 'rgba(255, 206, 86, 0.2)',
+				      borderWidth: 1,
 				    },
 				    {
 				        label: 'INCHEON',
 				        data: incheon,
-				        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				        borderColor: 'rgba(75, 192, 192, 0.2)',
+					    borderWidth: 1,
 				    },
 				    {
 				        label: 'YEOUIDO',
 				        data: yeouido,
-				        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+				        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+				        borderColor: 'rgba(153, 102, 255, 0.2)',
+					    borderWidth: 1,
 				      },
 				  ]
 				},

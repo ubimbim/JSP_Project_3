@@ -166,7 +166,7 @@ body{
 	
 	<div class="logo">
 		<i class="fab fa-apple"></i>
-		<a class="cate_a" href="">매장관리</a>
+		<a class="cate_a" href="<%=request.getContextPath() %>/shop/shop_main.jsp">매장관리</a>
 	</div>
 	
 	<ul class="menu">

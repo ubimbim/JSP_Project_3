@@ -1,8 +1,6 @@
 package com.shop.action;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +37,7 @@ public class ShopOrderOkAction implements Action {
 		odao.insertOrderList(shopid, pnum, order_no);
 		
 		List<ShopDTO> list = dao.getShopList(shopid);
-		List<OrderDTO> orderlist = odao.getOrderShopList(shopid);
+		List<OrderDTO> orderlist = odao.getOrderList(shopid);
 		request.setAttribute("prodList", list);
 		request.setAttribute("orderlist", orderlist);
 		ActionForward forward = new ActionForward();
