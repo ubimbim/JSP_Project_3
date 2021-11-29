@@ -398,23 +398,24 @@ public class OrderDAO {
 	}	// getOrderSetList 메서드 end
 	
 	// insertOrderList() 메소드
-	public int insertOrderList(String shopid, String pnum, int order_no,String order_code) {
+	public int insertOrderList(String shopid, String pnum, int order_no) {
 		int result = 0, count = 0;
 
 			try {
 				openConn();
 				
-				sql = "select max(order_code) from shop_order where shop_id = ?";
-				
+				sql = "select max(order_code) from shop_order";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, shopid);
 				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					count = Integer.parseInt(rs.getString(1).substring(8)) + 1;
-				}else {
-					count = 1;
-				}
 				
+				if(rs.next()) {
+					if(rs.getString(1) != null) {
+						count = rs.getInt(1)+1;
+					}else {
+						count = 1;
+					}
+				}
+
 				sql = "insert into shop_order (shop_id, pnum, order_no, "
 						+ "order_date, order_code) " + 
 						"values (?, ?, ?, sysdate, ?)";
@@ -422,7 +423,7 @@ public class OrderDAO {
 				pstmt.setString(1, shopid);
 				pstmt.setString(2, pnum);
 				pstmt.setInt(3, order_no);
-				pstmt.setString(4, order_code+count);
+				pstmt.setInt(4, count);
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -46,7 +46,7 @@ public class Shop_Login implements Action {
 	    }else if(check == -1) {
 	    	// 아이디는 맞으나 비밀번호가 틀린 경우
 	    	out.println("<script>");
-	    	out.println("alert('매장계정 비밀번호가 틀립니다.)");
+	    	out.println("alert('매장계정 비밀번호가 틀립니다.')");
 	    	out.println("history.back()");
 	    	out.println("</script>");
 	    }else {
