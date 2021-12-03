@@ -10,36 +10,74 @@
 <title>Insert title here</title>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="js/customer.js"></script> -->
-<script type="text/javascript">
-
-	function content(ocode) {
-		
-		document.checkForm.action = "<%=request.getContextPath() %>/admin_order_cont.do?code="+ocode;
-		
-	}
-
-</script>
 
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.num{
+		text-align:center;
+	}
+	
+	.top{
+		display: flex;
+		justify-content: center;
+		margin-top: 50px;
+	}
+
+	.all{
+		display: flex;
+		justify-content: center;
+		margin-top: 80px;
+	}
 
 	.ordertable {
-		float: left;
-		width: 40%;
+		
+		width: 500px;
+		height: 300px;
+		
 	}
 	
 	.ordercontent {
-		float: left;
-		width: 60%;
+		
+		margin-left: 100px;
+		
+		width:500px;
+		height: 500px;
 	}
-
 </style>
 </head>
 <body>
 
 	<jsp:include page="../include/admin_top.jsp" />
 	
-	<br><br><br><br><br>
+	<div class="top">
+	<form method="post" action="<%=request.getContextPath() %>/admin_order.do">
+		<input type="date" name="date1" required>
+		<input type="date" name="date2" required>
+		&nbsp;&nbsp;&nbsp;매장 :
+			<select name="search_shop" required>
+				<option value="all">전체</option>
+				<option value="yeouido">Apple 여의도</option>
+				<option value="garosu">Apple 가로수길</option>
+				<option value="hongdae">프리스비 홍대</option>
+				<option value="gimpo">윌리스 김포공항</option>
+				<option value="incheon">윌리스 인천터미널</option>
+			</select>
+		&nbsp;&nbsp;&nbsp;상태 : 
+		<select name="search_field" required>
+			<option value="all">전체</option>
+			<option value="order">요청</option>
+			<option value="order_ok">발주승인</option>
+			<option value="order_cancel">발주취소</option>
+		</select>
+		<input type="submit" value="확인">
+	</form>
+	</div>
 	
+	
+	<div class="all">
 	<c:set var="list" value="${List }" />
 	
 	<div class="ordertable">
@@ -190,6 +228,7 @@
 			</form>
 		</div>
 	</c:if>
-	
+	</div>
+	<jsp:include page="../include/shop_bottom.jsp" />
 </body>
 </html>

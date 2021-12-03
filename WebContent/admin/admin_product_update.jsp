@@ -6,15 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+td,tr {
+		padding : 10px;
+	}
+	tr th {
+		text-align: center;
+		background: #EEEEEE;
+		font-family: 'Gothic A1', sans-serif;
+	}
 
+</style>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <jsp:include page="../include/admin_top.jsp" />
 	
 	<div align="center">
-	
-	      <h3>상품 수정 폼 페이지</h3>
-	      
+	      <h2>상품 수정</h2>
 	   <br>
 	   
 	   <form method="post" enctype="multipart/form-data"
@@ -22,7 +36,7 @@
 	      <c:set var="dto" value="${productDto}" />
 	 
 	      
-	      <table bgcolor="E0E0E0" border="1" cellspacing="0" width="600"> 
+	      <table  border="0" cellspacing="0" width="800"> 
 	            
 	          <tr>
 	            <th>상품 이미지</th>
@@ -56,11 +70,16 @@
 	                      value="${dto.getPrice() }"> </td>
 	         </tr>
 	         
+	         <tr>
+	            <th>상품 정보</th>
+	            <td> <textarea name = "pcont" rows="5" cols="50">${dto.getPcont() }</textarea> </td>
+	         </tr>
+	         
 	         
 	         <tr>
 	            <td colspan="2" align="center">
-	               <input type="submit" value="상품수정">&nbsp;&nbsp;&nbsp;
-	               <input type="reset" value="다시작성">
+	               <input class="btn btn-outline-secondary" type="submit" value="상품수정">&nbsp;&nbsp;&nbsp;
+	               <input class="btn btn-outline-secondary" type="reset" value="다시작성">
 	            </td>
 	         </tr>
 	      
@@ -71,5 +90,6 @@
 	
 	</div>
 
+<jsp:include page="../include/shop_bottom.jsp" />
 </body>
 </html>

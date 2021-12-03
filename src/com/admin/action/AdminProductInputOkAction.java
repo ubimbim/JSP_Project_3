@@ -17,7 +17,7 @@ public class AdminProductInputOkAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Project\\upload";
+		String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Project_2\\upload";
 		int fileSize = 5 * 1024 * 1024;
 		MultipartRequest multi = new MultipartRequest(
 				request, 
@@ -30,12 +30,14 @@ public class AdminProductInputOkAction implements Action {
 		String pnum = multi.getParameter("pnum").trim();
 		String pname = multi.getParameter("pname").trim();
 		int price = Integer.parseInt(multi.getParameter("price").trim());
+		String pcont = multi.getParameter("pcont").trim();
 		
 		ProductDTO dto = new ProductDTO();
 		dto.setPimage(pimage);
 		dto.setPnum(pnum);
 		dto.setPname(pname);
 		dto.setPrice(price);
+		dto.setPcont(pcont);
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		int res = dao.insertProduct(dto);

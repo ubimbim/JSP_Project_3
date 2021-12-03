@@ -35,8 +35,8 @@ public class Admin_Write implements Action {
 		PrintWriter out = response.getWriter();
 		
 		if(res > 0) {
-			forward.setRedirect(false);
-			forward.setPath("shop/shop_login.jsp");
+			forward.setRedirect(true);
+			forward.setPath("admin_main.do");
 		}else {
 			out.println("<script>");
 			out.println("alert('회원가입 실패')");

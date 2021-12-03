@@ -20,7 +20,7 @@ public class BoardUpdateOkAction implements Action {
 		
 		// 수정 폼 페이지에서 입력받은 데이터를 DB에 저장하는 비지니스 로직
 		// 첨부파일 저장될 위치
-		String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Project\\upload";
+		String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Project\\upload";
 		
 		// 첨부파일 사이즈
 		int fileSize = 5*1024*1024;

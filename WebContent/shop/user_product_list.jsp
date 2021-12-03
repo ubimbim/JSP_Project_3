@@ -12,31 +12,67 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+}
 
+#body-content {
+    margin-top: 0px;
+    padding-bottom: 170px; /* footer의 높이 */
+}
+	tr th {
+		text-align: center;
+		background: #EEEEEE;
+	}
+	
+	tr {
+		height: 60px;
+	}
+	
 	td {
 		text-align: center;
 	}
 	
-	tr:hover {
-    background-color:#CCCCCC;
+	h3 {
+		text-align: center;
+		left: 150px;
+		top: 50px;
 	}
 	
+	td a {
+		text-decoration: none;
+		color: black;
+	}
 	
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	tr:hover {
+    	background-color:#CCCCCC;
+	}
 
 </style>
 </head>
 <body>
-
 	<jsp:include page="../include/shop_top.jsp" />
-
+	<div id="body-wrapper">
+	<div id="body-content">
 	<div align="center">
+		
+	      <h3>${shopName } 재고 리스트</h3>
+
 		<br>
-	      <h1>${shop_name } 재고 리스트</h1>
-		<br><br>
 	   
-	   <table bgcolor="E0E0E0" border="1" cellspacing="0" width="700">
-	      <tr bgcolor="#263343">
+	   <table border="0" cellspacing="0" width="700">
+	      <tr>
 	          <th>상품번호</th> <th>상품 이름</th> <th>상품 수량</th>
 	      </tr>
 	      
@@ -65,7 +101,8 @@
 	   
 	   </table>   	   
 	</div>
-
+	</div>
 	<jsp:include page="../include/shop_bottom.jsp" />
+	</div>
 </body>
 </html>

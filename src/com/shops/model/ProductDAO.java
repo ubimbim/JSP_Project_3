@@ -94,7 +94,7 @@ import javax.sql.DataSource;
 			try {
 				openConn();
 				
-				sql = "insert into prod values(?, ?, ?, ?)";
+				sql = "insert into prod values(?, ?, ?, ?,?)";
 				
 				pstmt = con.prepareStatement(sql);
 				
@@ -102,6 +102,7 @@ import javax.sql.DataSource;
 				pstmt.setString(2, dto.getPname());
 				pstmt.setInt(3, dto.getPrice());
 				pstmt.setString(4, dto.getPimage());
+				pstmt.setString(5, dto.getPcont());
 				
 				result = pstmt.executeUpdate();
 				
@@ -136,6 +137,7 @@ import javax.sql.DataSource;
 				dto.setPnum(rs.getString("pnum"));
 				dto.setPname(rs.getString("pname"));				
 				dto.setPrice(rs.getInt("price"));
+				dto.setPcont(rs.getString("pcont"));
 		
 				list.add(dto);
 			}
@@ -171,6 +173,7 @@ import javax.sql.DataSource;
 					dto.setPnum(rs.getString("pnum"));
 					dto.setPname(rs.getString("pname"));				
 					dto.setPrice(rs.getInt("price"));
+					dto.setPcont(rs.getString("pcont"));
 					
 				}
 				
@@ -191,14 +194,15 @@ import javax.sql.DataSource;
 			try {
 				openConn();
 				
-				sql = "update prod set pname =?, price = ?, pimage = ? where pnum = ?";
+				sql = "update prod set pname =?, price = ?, pimage = ?, pcont = ? where pnum = ?";
 				
 				pstmt = con.prepareStatement(sql);
 				
 				pstmt.setString(1, dto.getPname());
 				pstmt.setInt(2, dto.getPrice());
 				pstmt.setString(3, dto.getPimage());
-				pstmt.setString(4, dto.getPnum());
+				pstmt.setString(4, dto.getPcont());
+				pstmt.setString(5, dto.getPnum());
 				
 				result = pstmt.executeUpdate();
 				
@@ -271,5 +275,141 @@ import javax.sql.DataSource;
 			return list;
 		
 			}
+		public List<ProductDTO> getProductListwch() {
+			
+			List<ProductDTO> list = new ArrayList<ProductDTO>();
+			
+			try {
+				openConn();
+				
+				sql = "select * from prod where pnum like 'WCH%'order by pnum desc";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ProductDTO dto = new ProductDTO();
+					
+					dto.setPimage(rs.getString("pimage"));
+					dto.setPnum(rs.getString("pnum"));
+					dto.setPname(rs.getString("pname"));				
+					dto.setPrice(rs.getInt("price"));
+					dto.setPcont(rs.getString("pcont"));
+			
+					list.add(dto);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeConn(rs, pstmt, con);
+			}
+			
+			return list;
+		}
+		public List<ProductDTO> getProductListpod() {
+			
+			List<ProductDTO> list = new ArrayList<ProductDTO>();
+			
+			try {
+				openConn();
+				
+				sql = "select * from prod where pnum like 'POD%'order by pnum desc";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ProductDTO dto = new ProductDTO();
+					
+					dto.setPimage(rs.getString("pimage"));
+					dto.setPnum(rs.getString("pnum"));
+					dto.setPname(rs.getString("pname"));				
+					dto.setPrice(rs.getInt("price"));
+					dto.setPcont(rs.getString("pcont"));
+			
+					list.add(dto);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeConn(rs, pstmt, con);
+			}
+			
+			return list;
+		}
+public List<ProductDTO> getProductListpho() {
+			
+			List<ProductDTO> list = new ArrayList<ProductDTO>();
+			
+			try {
+				openConn();
+				
+				sql = "select * from prod where pnum like 'PHO%'order by pnum desc";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ProductDTO dto = new ProductDTO();
+					
+					dto.setPimage(rs.getString("pimage"));
+					dto.setPnum(rs.getString("pnum"));
+					dto.setPname(rs.getString("pname"));				
+					dto.setPrice(rs.getInt("price"));
+					dto.setPcont(rs.getString("pcont"));
+			
+					list.add(dto);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeConn(rs, pstmt, con);
+			}
+			
+			return list;
+		}
+public List<ProductDTO> getProductListpad() {
+	
+	List<ProductDTO> list = new ArrayList<ProductDTO>();
+	
+	try {
+		openConn();
+		
+		sql = "select * from prod where pnum like 'PAD%'order by pnum desc";
+		
+		pstmt = con.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			ProductDTO dto = new ProductDTO();
+			
+			dto.setPimage(rs.getString("pimage"));
+			dto.setPnum(rs.getString("pnum"));
+			dto.setPname(rs.getString("pname"));				
+			dto.setPrice(rs.getInt("price"));
+			dto.setPcont(rs.getString("pcont"));
+	
+			list.add(dto);
+		}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		closeConn(rs, pstmt, con);
+	}
+	
+	return list;
+}
 	}
 	

@@ -21,7 +21,10 @@
 </script>
 
 <style type="text/css">
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
 	.ordertable {
 		float: left;
 		width: 40%;

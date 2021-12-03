@@ -39,7 +39,7 @@ public class ShopOrderOkAction implements Action {
 		odao.insertOrderList(shopid, pnum, order_no);
 		
 		List<ShopDTO> list = dao.getShopList(shopid);
-		List<OrderDTO> orderlist = odao.getOrderShopList(shopid);
+		List<OrderDTO> orderlist = odao.getOrderList(shopid);
 		request.setAttribute("prodList", list);
 		request.setAttribute("orderlist", orderlist);
 		ActionForward forward = new ActionForward();

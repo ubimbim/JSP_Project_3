@@ -18,15 +18,28 @@ public class AdminOrderListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		// 재고요청 테이블 목록을 가져와서 출력하는 비지니스 로직
-		// String order_code = "";
-		
-		// String code = request.getParameter("code");
-		response.setContentType("UTF-8");
 		
 		OrderDAO dao = OrderDAO.getInstance();
 		
-		List<OrderDTO> list = dao.getOrderList();
+		List<OrderDTO> list = dao.getOrderRequestList();
 		request.setAttribute("List", list);
+		
+		if(request.getParameter("search_shop") != null) {
+			
+			String shop = request.getParameter("search_shop");
+			String field = request.getParameter("search_field");
+			String date1 = request.getParameter("date1");
+			String date2 = request.getParameter("date2");
+			
+			request.setAttribute("shop", shop);
+			request.setAttribute("field", field);
+			request.setAttribute("date1", date1);
+			request.setAttribute("date2", date2);
+			
+			List<OrderDTO> orderlist = dao.getOrderAllSetList(shop, field, date1, date2);
+			request.setAttribute("List", orderlist);
+			
+		}
 		
 		if(request.getParameter("code") != null) {
 			

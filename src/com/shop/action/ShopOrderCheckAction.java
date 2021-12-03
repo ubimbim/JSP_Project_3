@@ -21,11 +21,7 @@ public class ShopOrderCheckAction implements Action {
 		HttpSession session = request.getSession();
 		String shopid = (String)session.getAttribute("shopId");
 
-		String field = request.getParameter("search_field");
-		String date1 = request.getParameter("date1");
-		String date2 = request.getParameter("date2");
-		System.out.println(date2);
-		List<OrderDTO> orderlist = dao.getOrderSetList(shopid, field, date1, date2);
+		List<OrderDTO> orderlist = dao.getOrderList(shopid);
 
 		request.setAttribute("orderlist", orderlist);
 		request.setAttribute("shopid", shopid);

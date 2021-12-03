@@ -10,15 +10,10 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/1c8b531657.js" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 <style type="text/css">
-
-body{
-	margin: 0;
-	font-family: ''Source Sans Pro', sans-serif;
-	
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .cate_a {
@@ -33,7 +28,7 @@ body{
 	background-color: #263343;
 	padding: 8px 12px;
 	
-	margin-bottom: 90px;
+	margin-bottom: 30px;
 }
 
 
@@ -50,6 +45,7 @@ body{
 	display: flex;
 	list-style: none;
 	padding-left: 0;
+	z-index: 1;
 }
 
 .menu li{
@@ -92,6 +88,8 @@ body{
 	margin:0;
 	padding: 0;
 	font-size: 13px;
+	
+	display:none;
 }
 
 .menu ul{
@@ -100,11 +98,12 @@ body{
 	padding: 0;
 	position: absolute;
 	left: 0;
-	top: 40px;
+	top: 38px;
 	width: 105px;
 	background: #263343;
 	text-align: center;
 	opacity: 0;
+	
 }
 
 .menu li:hover ul{
@@ -115,6 +114,8 @@ body{
 	height: 35px;
 	overflow: visible;
 	padding: 0;
+	
+	display: block;
 }
 
 .menu li:hover > a{
@@ -173,7 +174,7 @@ body{
 	</div>
 	
 	<ul class="menu">
-		<li><a class="cate_a" href="<%=request.getContextPath() %>/shop/shop_main.jsp">Home</a></li>
+		<li><a class="cate_a" href="<%=request.getContextPath() %>/shop_login_ok.do?code=1">Home</a></li>
 		
 		<li><a class="cate_a" href="<%=request.getContextPath() %>/shop/shop_info.jsp">매  장</a>
 			<ul class="sub">
@@ -187,14 +188,15 @@ body{
 			<ul class="sub">
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/user_product_list.do">재고관리</a></li>
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_order.do">발주</a></li>
-				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop/shop_order_check.jsp">발주현황</a></li>
+				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_order_check.do">발주현황</a></li>
 			</ul>
 		</li>
 		
 		<li><a class="cate_a" href="<%=request.getContextPath() %>/shop_summary.do">매  출</a>
 			<ul class="sub">
-				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_summary.do">주간 매출</a></li>
-				<li> <a class="cate_a" href="">매장별 매출</a></li>
+				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_weekly.do">주간 매출</a></li>
+				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_monthly.do">월 매출</a></li>
+				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_summary.do">매장별 매출</a></li>
 				<li> <a class="cate_a" href="<%=request.getContextPath() %>/shop_report.do">매출 보고</a></li>
 			</ul>
 		</li>

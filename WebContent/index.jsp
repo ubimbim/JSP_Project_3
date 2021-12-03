@@ -7,56 +7,111 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/1c8b531657.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<style type="text/css">
-
-body{
-	background-color: #263343;
-}
-.top{
-	font-size:40px;
-	color:white;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  background-color: #263343;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
-.top i{
-	color:white;
-}
-
-
-.parent{
+div.main_top {
 	 display: flex;
      justify-content: center;
-     margin-top: 200px;
+     margin-top: 150px;
 }
-div.login1{
-	width: 300px;
-    height: 270px;
-    border: 3px solid gray;
+
+div.main_bottom {
+	 display: flex;
+     justify-content: center;
+     margin-top: 50px;
+}
+
+div.back_login {
+	position: relative;
+	width: 1000px;
+	height: 500px;
+	background-color: white;
+	border-radius: 1em;
+}
+
+div.login1 {
+	position: absolute;
+	top: 50px;
+	width: 500px;
+    height: 400px;
     text-align: center;
-    margin-right: 100px;
-    color: white;
+    color: black;
+    border-right: 1px solid #C5CAE9;
 }
 
-.log1{
-	margin-left: 18px;
+.login_id {
+	margin-top: 35px;
+	margin-left: 78px;
+	width: 60%;
 }
 
-.log2{
-	margin-left: 18px;
+.login_id input {
+	width: 100%;
+	height: 50px;
+	border-radius: 30px;
+	margin-top: 10px;
+	padding: 0px 20px;
+	border: 1px solid lightgray;
+	outline: none;
 }
 
-div.login2{
-	width: 300px;
-    height: 270px;
-    border: 3px solid gray;
+div.login2 {
+	position: absolute;
+	top: 50px;
+	left: 500px;
+	width: 500px;
+    height: 400px;
     text-align: center;
-    color: white;
+    color: black;
+    border-radius: 2em;
 }
-#bottom{
-	min-height: 100%;
-	padding-bottom: 100px;
+
+.login_pw {
+	margin-top: 10px;
+	margin-left: 78px;
+	width: 60%;
 }
-.footer{
+
+.login_pw input {
+	width: 100%;
+	height: 50px;
+	border-radius: 30px;
+	margin-top: 10px;
+	padding: 0px 20px;
+	border: 1px solid lightgray;
+	outline: none;
+}
+
+.login_submit {
+	margin-top: 50px;
+	margin-left: 78px;
+	width: 340px;
+	height: 50px;
+}
+.login_submit input {
+	width: 100%;
+	height: 50px;
+	border: 0;
+	outline: none;
+	border-radius: 30px;
+	background: linear-gradient(to left, rgb(46, 139, 255), rgb(47, 191, 255));
+	color: white;
+	font-size: 1.0em;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+.hr {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.footer {
 	width:100%;
 	height: 999px;
 	position: absolute;
@@ -68,70 +123,45 @@ div.login2{
 
 </head>
 <body>
-
-<div class="top" align="center">
-	<i class="fab fa-apple"></i>
-	<a>영훈이네 관리 시스템</a>
-</div>
-
-<div class="parent">
+	
+	<div class="main_top">
+		<img class="img" src="images/applelogo.png">
+	</div>
+	<div class="main_bottom">
+	<div class="back_login">
         <div class="login1" >
-        
-        <h4>Shop Login</h4>
-        
-        <br><br>
-        
-        <form class="log1" method="post"
-        	action="<%=request.getContextPath() %>/shop_login_ok.do">
-        	<table>
-        		<tr>
-				<th>I  D</th>
-				<td> <input name="shop_id"> </td>
-				</tr>
-			
-				<tr>
-				<th>Password</th>
-				<td> <input type="password" name="shop_pwd"> </td>
-				</tr>
-				
-				<tr>
-				<td colspan="3" align="center">
-					<br><input type="submit" value="로그인">
-				</td>
-				</tr>
-        	</table>	
-        
-        </form>
+	        <form method="post" action="<%=request.getContextPath() %>/main_login_ok.do">
+	        	<h2>Admin Login</h2>
+	        	<hr class="hr" color="#2e8cff" width="30" size="3">
+	        	<div class="login_id">
+	                <input name="main_id" placeholder="ID">
+	            </div>
+	            <div class="login_pw">
+	                <input type="password" name="main_pwd" placeholder="Password">
+	            </div>	
+				<div class="login_submit">
+	                <input type="submit" value="LOGIN">
+	            </div>
+	        </form>
         </div>
            
         <div class="login2" >
-        <h4>Manager Login</h4>
-        
-        <br><br>
-        
-        <form class="log2" method="post"
-        	action="<%=request.getContextPath() %>/main_login_ok.do">
-        	<table>
-        		<tr>
-				<th>I  D</th>
-				<td> <input name="main_id"> </td>
-				</tr>
-			
-				<tr>
-				<th>Password</th>
-				<td> <input type="password" name="main_pwd"> </td>
-				</tr>
-				
-				<tr>
-				<td colspan="3" align="center">
-					<br><input type="submit" value="로그인">
-				</td>
-				</tr>
-        	</table>	
-        
-        </form>
+        	<form method="post" action="<%=request.getContextPath() %>/shop_login_ok.do">
+	        	<h2>Shop Login</h2>
+	        	<hr class="hr" color="#2e8cff" width="30" size="3">
+	        	<div class="login_id">
+	                <input name="shop_id" placeholder="ID">
+	            </div>
+	            <div class="login_pw">
+	                <input type="password" name="shop_pwd" placeholder="Password">
+	            </div>	
+				<div class="login_submit">
+	                <input type="submit" value="LOGIN">
+	            </div>
+	        </form>
         </div>
-</div>
+    </div>
+	</div>
 
 </body>
 </html>

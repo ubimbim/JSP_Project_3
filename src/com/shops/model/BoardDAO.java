@@ -95,7 +95,7 @@ public class BoardDAO {
 			
 			openConn();
 			
-			sql = "select count(*) from board";
+			sql = "select count(*) from shop_board";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -114,6 +114,90 @@ public class BoardDAO {
 		return count;
 		
 	} // getBoardCount() 메소드 end
+	
+	// getMainNoticeList() 메소드
+	// 메인화면에서의 공지사항 띄우기, 공지 2개, (최근 3개)
+	public List<BoardDTO> getMainNoticeList() {
+		
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		
+		try {
+			
+			openConn();
+			
+			sql = "select * from (select * from shop_board where board_code = '공지' order by board_no desc) where rownum < 3";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setBoard_no(rs.getInt("board_no"));
+				dto.setBoard_writer(rs.getString("board_writer"));
+				dto.setBoard_title(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_cont"));
+				dto.setBoard_code(rs.getString("board_code"));
+				dto.setBoard_image(rs.getString("board_image"));
+				dto.setBoard_date(rs.getString("board_date"));
+				dto.setBoard_redate(rs.getString("board_redate"));
+				
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return list;
+		
+	} // getMainNoticeList() 메소드 end
+	
+	// getMainBoardList() 메소드
+	// 메인화면에서의 공지사항 띄우기, (공지 2개) ,최근 3개
+	public List<BoardDTO> getMainBoardList() {
+		
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		
+		try {
+			
+			openConn();
+			
+			sql = "select * from (select * from shop_board where board_code not in '공지' order by board_no desc) where rownum < 5";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setBoard_no(rs.getInt("board_no"));
+				dto.setBoard_writer(rs.getString("board_writer"));
+				dto.setBoard_title(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_cont"));
+				dto.setBoard_code(rs.getString("board_code"));
+				dto.setBoard_image(rs.getString("board_image"));
+				dto.setBoard_date(rs.getString("board_date"));
+				dto.setBoard_redate(rs.getString("board_redate"));
+				
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return list;
+		
+	} // getMainBoardList() 메소드 end
 	
 	// getBoardList() 메소드
 	// 게시글 전체 목록을 나타내는 메소드

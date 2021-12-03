@@ -18,9 +18,17 @@ public class AdminProductListAction implements Action {
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		
-		List<ProductDTO> list = dao.getProductList();
+		//List<ProductDTO> list = dao.getProductList();
+		List<ProductDTO> list = dao.getProductListwch();
+		List<ProductDTO> list2 = dao.getProductListpod();
+		List<ProductDTO> list3 = dao.getProductListpho();
+		List<ProductDTO> list4 = dao.getProductListpad();
 		
-		request.setAttribute("productList", list);
+		//request.setAttribute("productList", list);
+		request.setAttribute("productListwch", list);
+		request.setAttribute("productListpod", list2);
+		request.setAttribute("productListpho", list3);
+		request.setAttribute("productListpad", list4);
 		
 		ActionForward forward = new ActionForward();
 		

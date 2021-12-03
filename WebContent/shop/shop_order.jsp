@@ -8,35 +8,48 @@
 <meta charset="UTF-8">
 <title>Apple store order page</title>
 <style type="text/css">
-	div.row {
-		width: 80%;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+	.kor{
 		display: flex;
+		
+		justify-content: center;
+     	
+     	
+     	margin-top: 80px;
 	}
-	div.low {
-		width: 80%;
+	
+	.qwe{
+		margin-bottom: 50px;
 	}
-	div.left {
-        width: 50%;
-        float: left;
+
+	.right{
+		margin-left: 100px;
 	}
-	div.right {
-        width: 50%;
-        float: right;
-	}
-	table {
-		margin-left:auto;
-		margin-right:auto;
+	
+	
+	input[type='number']{
+    width: 80px;
+	} 
+	th, td {
+	border-bottom: 1px solid lightgrey;
 	}
 </style>
 </head>
 <body>
 
 	<jsp:include page="../include/shop_top.jsp" />
-	
+
 	<c:set var="shopid" value="${shopId }" />
-	<div class="row" align="center">
+	<div class="kor" align="center">
 	<div class="left">
-	<h3>${shopid } 재고 현황</h3>
+	<h3 class="qwe">${shopName } 재고 현황</h3>
 		<table width="300">
 		<c:set var="list" value="${prodList }" />
 		<c:set var="total" value="${total }" />
@@ -53,8 +66,40 @@
 	        </c:if>
 		</table>
 		</div>
-		<div class="left">
-		<h3>발주 내역</h3>
+		<div class="right">
+		<form method="post" 
+		action="<%=request.getContextPath() %>/shop_order_ok.do"
+		onsubmit = "return confirm('본사에 발주 요청 하시겠습니까?');">
+		<br> <br>
+		<table>
+			<tr>
+				<td>상품</td>
+				<td>
+					<select name="pnum" required>
+						<option value="PAD001" selected>iPadPro [PAD001]</option>
+		            	<option value="PAD002">iPadAir [PAD002]</option>
+		            	<option value="PAD003">iPad [PAD003]</option>
+		            	<option value="PAD004">iPadmini [PAD004]</option>
+		            	<option value="PHO001">iPhone13Pro [PHO001]</option>	            	
+		            	<option value="PHO002" >iPhone13 [PHO002]</option>
+		            	<option value="PHO003">iPhone13mini [PHO003]</option>
+		            	<option value="PHO004">iPhoneSE [PHO004]</option>
+		            	<option value="POD001">AirPodsPro [POD001]</option>
+		            	<option value="POD002">AirPods3 [POD002]</option>	            	
+		            	<option value="POD003">AirPods2 [POD003]</option>
+		            	<option value="WCH001">AppleWatch7 [WCH001]</option>
+		            	<option value="WCH002">AppleWatchSE [WCH002]</option>
+		            	<option value="WCH003">AppleWatch3 [WCH003]</option>             	
+					</select>
+				</td>
+				<td>수량</td>
+				<td><input size="3" type="number" min="0" name="order_no" required></td>
+	            <td colspan="2" align="center">
+	               <input type="submit" value="발주전송">&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>	
+		</table>
+	</form>
 		<table width="600">
 		<c:set var="list" value="${orderlist }" />
 			<c:if test="${!empty list }">
@@ -76,45 +121,9 @@
 		</table>
 		</div>
 	</div>
-	<div  class="low" align = "center">
-	<form method="post" 
-		action="<%=request.getContextPath() %>/shop_order_ok.do"
-		onsubmit = "return confirm('본사에 발주 요청 하시겠습니까?');">
-		<br> <br>
-		<table>
-			<tr>
-				<td>발주 상품</td>
-				<td>
-					<select name="pnum" required>
-						<option value="PAD001" selected>iPadPro [PAD001]</option>
-		            	<option value="PAD002">iPadAir [PAD002]</option>
-		            	<option value="PAD003">iPad [PAD003]</option>
-		            	<option value="PAD004">iPadmini [PAD004]</option>
-		            	<option value="PHO001">iPhone13Pro [PHO001]</option>	            	
-		            	<option value="PHO002" >iPhone13 [PHO002]</option>
-		            	<option value="PHO003">iPhone13mini [PHO003]</option>
-		            	<option value="PHO004">iPhoneSE [PHO004]</option>
-		            	<option value="POD001">AirPodsPro [POD001]</option>
-		            	<option value="POD002">AirPods3 [POD002]</option>	            	
-		            	<option value="POD003">AirPods2 [POD003]</option>
-		            	<option value="WCH001">AppleWatch7 [WCH001]</option>
-		            	<option value="WCH002">AppleWatchSE [WCH002]</option>
-		            	<option value="WCH003">AppleWatch3 [WCH003]</option>             	
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>발주 수량</td>
-				<td><input type="number" min="0" name="order_no" required></td>
-			</tr>
-			<tr>
-	            <td colspan="2" align="center">
-	               <input type="submit" value="발주전송">&nbsp;&nbsp;&nbsp;
-	         	   <input type="reset" value="다시작성">
-				</td>
-			</tr>	
-		</table>
-	</form>
+
+	<div>
+	<jsp:include page="../include/shop_bottom.jsp" />
 	</div>
 </body>
 </html>

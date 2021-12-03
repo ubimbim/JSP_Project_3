@@ -4,12 +4,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>지도 이동시키기</title>
+    <title>Apple 매장 정보</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-
-body{
-font-family: 'Nanum Gothic', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 #menu {
@@ -63,8 +62,9 @@ font-family: 'Nanum Gothic', sans-serif;
 		<li><a class="menuLink" onclick="yeouido()">Apple 여의도</a></li>
 	</ul>
 </div>
-<hr color="lightgray" width = "50%">
+
 <div align="center">
+<hr color="lightgray" width = "50%">
 <p id="shopname">Apple 가로수길</p>
 <div id="info" align="center">
 <p><img src="../images/location.png" width="18" height="18"> 서울 강남구 가로수길 43 (우)06028</p>

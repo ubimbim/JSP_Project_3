@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.naming.Context;
@@ -86,6 +87,8 @@ public class SalesDAO {
 		
 	}  // closeConn() 메서드 end
 	
+	//salesInsert메서드
+	//매출 보고 내용 DB에 추가하는 메서드
 	public int salesInsert(SalesDTO dto, String pnum, int sales_no, String shopid) {
 		int result = 0, count = 0;
 		
@@ -118,8 +121,9 @@ public class SalesDAO {
 			closeConn(rs, pstmt, con);
 		}
 		return result;
-	}	// salesInsert() end
+	}	// salesInsert()메서드 end
 	
+	// 당일 보고된 매출 내역을 불러오는 메서드
 	public List<SalesDTO> salesToday(String shopid) {
 		List<SalesDTO> list = new ArrayList<SalesDTO>();
 		
@@ -151,11 +155,11 @@ public class SalesDAO {
 			closeConn(rs, pstmt, con);
 		}
 		return list;
-	}	// salesInsert() end
+	}	// salesToday()메서드 end
 	
+	// 당일 매출 총 금액을 불러오는 메서드
 	public int totalToday(String shopid) {
 		int result = 0;
-		
 		
 		try {
 			openConn();
@@ -181,6 +185,7 @@ public class SalesDAO {
 		return result;
 	}	//totalToday() 메서드 end
 	
+	// 제품 번호를 확인하는 메서드
 	public String getPnum(int no) {
 		String result = null;
 		try {
@@ -206,6 +211,7 @@ public class SalesDAO {
 		return result;
 	}	// getPnum()메서드 end;
 	
+	// 보고된 매출을 매출번호로 삭제하는 메서드
 	public int deleteSales(int no) {
 		int result = 0;
 		
@@ -228,6 +234,7 @@ public class SalesDAO {
 		return result;
 	}	// deleteSales()메서드 end;
 	
+	// 매출을 삭제 후 매출번호를 갱신하는 메서드
 	public int updateSalesNo(int no) {
 		int result = 0;
 		try {
@@ -253,6 +260,7 @@ public class SalesDAO {
 		return result;
 	}	// updateSalesNo()메서드 end;
 	
+	// 매장별  총 매출액을 불러오는 메서드
 	public ArrayList<Integer> shopsales() {
 		ArrayList<Integer> shopsales = new ArrayList<>();
 		
@@ -272,10 +280,13 @@ public class SalesDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
 		}
 		return shopsales;
 	}	// shopsales() 메서드 end
 	
+	// 제품별 총 매출을 불러오는 메서드
 	public int[] prodsales() {
 		int[] prodsales = new int[4];
 		
@@ -312,23 +323,30 @@ public class SalesDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
 		}
 		return prodsales;
 	}	// prodsales() 메서드 end
 	
-	public HashMap<String, Integer> weekSales(String date, String shopid) {
-		HashMap<String, Integer> result = new HashMap<String, Integer>();
+	// 해당 매장의 날자별 주간 매출을 불러오는 메서드
+	public HashMap<String, Integer> allSales(String sdate, String edate, String shopid) {
+		HashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
 		
 		try {
 			openConn();
 			
-			sql = "select sales_date, NVL(sum(sales_no*price), 0) as total "
-					+ "from sales join prod on sales.pname = prod.pname "
-					+ "where sales_date >= ? and shop_id = ? "
-					+ "group by sales.sales_date ";
+			sql = "select sales_date, NVL(sum(sales_no*price), 0) as total " + 
+					"from sales join prod on sales.pname = prod.pname " + 
+					"where sales_date between to_date(? , 'YYYY/MM/DD') " + 
+					"and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') " + 
+					"and shop_id = ? " + 
+					"group by sales.sales_date " + 
+					"order by sales_date";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, date);
-			pstmt.setString(2, shopid);
+			pstmt.setString(1, sdate);
+			pstmt.setString(2, edate);
+			pstmt.setString(3, shopid);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -337,19 +355,23 @@ public class SalesDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
 		}
 		return result;
-	}
+	} // weekSales()메서드 end
 	
-	public ArrayList<Integer> shopsalesweek(String sdate, String edate) {
-		ArrayList<Integer> shopsales = new ArrayList<>();
+	// 매장별 주간 매출 기록을 불러오는 메서드
+	public HashMap<String, Integer> shopsalesweek(String sdate, String edate) {
+		HashMap<String, Integer> shopsales = new HashMap<String, Integer>();
 		
 		try {
 			openConn();
-			sql = "select sum(price*s.sales_no)as total " + 
+			sql = "select shop_id, NVL(sum(price*s.sales_no),0) as total " + 
 					"from prod p join sales s " + 
 					"on p.pname = s.pname " + 
-					"where sales_date between ? and ? " + 
+					"where sales_date between to_date(? , 'YYYY/MM/DD') " + 
+					"and to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') " + 
 					"group by s.shop_id " + 
 					"order by s.shop_id";
 			pstmt = con.prepareStatement(sql);
@@ -358,15 +380,18 @@ public class SalesDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				shopsales.add(rs.getInt(1));
+				shopsales.put(rs.getString("shop_id"), rs.getInt("total"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
 		}
 		return shopsales;
 	}	// shopsales() 메서드 end
 	
+	// 제품별 일정기간 매출을 불러오는 메서드
 	public int[] prodsalesweek(String sdate, String edate) {
 		int[] prodsales = new int[4];
 		
@@ -415,7 +440,134 @@ public class SalesDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
 		}
 		return prodsales;
 	}	// prodsales() 메서드 end
+	
+	// 특정 매장의 제품별 일정기간 매출을 불러오는 메서드
+	public int[] shopprodsales(String sdate, String edate, String shopid) {
+		int[] prodsales = new int[4];
+		
+		try {
+			openConn();
+			sql = "select NVL(sum(sales.sales_no),0) from sales " + 
+					"where pname like 'iPad%' "
+					+ "and sales_date between to_date(? , 'YYYY/MM/DD') and "
+					+ "to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+					+ "and shop_id = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sdate);
+			pstmt.setString(2, edate);
+			pstmt.setString(3, shopid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				prodsales[0]=rs.getInt(1);
+				sql = "select NVL(sum(sales.sales_no),0) from sales " + 
+						"where pname like 'iPhone%' "
+						+ "and sales_date between to_date(? , 'YYYY/MM/DD') and "
+						+ "to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+						+ "and shop_id = ? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, sdate);
+				pstmt.setString(2, edate);
+				pstmt.setString(3, shopid);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					prodsales[1]=rs.getInt(1);
+					sql = "select NVL(sum(sales.sales_no),0) from sales " + 
+							"where pname like 'AirPods%' " 
+							+ "and sales_date between to_date(? , 'YYYY/MM/DD') and "
+							+ "to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+							+ "and shop_id = ? ";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, sdate);
+					pstmt.setString(2, edate);
+					pstmt.setString(3, shopid);
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+						prodsales[2]=rs.getInt(1);
+						sql = "select NVL(sum(sales.sales_no),0) from sales " + 
+								"where pname like 'AppleWatch%' "
+								+ "and sales_date between to_date(? , 'YYYY/MM/DD') and "
+								+ "to_date(? || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS') "
+								+ "and shop_id = ? ";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, sdate);
+						pstmt.setString(2, edate);
+						pstmt.setString(3, shopid);
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							prodsales[3]=rs.getInt(1);}
+					}
+				}
+			}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
+		}
+		return prodsales;
+	}	// hopprodsales() 메서드 end
+		
+	// 월 매출 총 합계를 불러오는 메서드
+	public int getMonthSales(String shopid, String month) {
+		int total = 0;
+		
+		try {
+			openConn();
+			sql = "select sum(price*sales_no)  " + 
+					"from sales left join prod " + 
+					"on sales.pname = prod.pname  " + 
+					"where shop_id = ? and " + 
+					"sales_date like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, shopid);
+			pstmt.setString(2, month+"%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
+		}
+		return total;
+	} // getMonthSales()메서드 end;
+	
+	// 월간 매출 리스트를 불러오는 메서드
+	public HashMap<String, Integer> getMonthList(String month, String shopid) {
+		HashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
+		
+		try {
+			openConn();
+			
+			sql = "select sales_date, NVL(sum(sales_no*price), 0) as total " + 
+					"from sales join prod on sales.pname = prod.pname " + 
+					"where sales_date like ? " + 
+					"and shop_id = ? " + 
+					"group by sales.sales_date " + 
+					"order by sales_date";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, month+"%");
+			pstmt.setString(2, shopid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result.put(rs.getString("sales_date"), rs.getInt("total"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	} // weekSales()메서드 end
 }

@@ -12,67 +12,151 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">	
 
-	td {
-		text-align: center;
+	td,tr {
+		text-align: center;padding : 30px;
 	}
-	tr:hover {
-    background-color:#CCCCCC;
+
+	.na{
+	color:white;
+	}
+	
+	.ac{
+		display: flex;
+	}
+	table {
+		margin : 25px;
 	}
 </style>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 	<jsp:include page="../include/admin_top.jsp" />
 
 	<div align="center">
-	      <h1>2-2)상품(제품) 리스트 페이지</h1>
+	      <h2>상품 리스트</h2>
 	   <br>
-	   
-	   <table bgcolor="E0E0E0" border="1" cellspacing="0" width="65%">
-	      <tr bgcolor="#263343">
-	         <th>이미지</th> <th>상품번호</th>
-	          <th>상품 이름</th> <th>상품 가격</th>
-	           <th>수 정&nbsp;&nbsp;|&nbsp;&nbsp;삭 제</th>
-	      </tr>
-	      
-	      <c:set var="list" value="${productList }" />
+	     <c:set var="list" value="${productListpho }" />
 	      <c:if test="${!empty list }">
-	         <c:forEach items="${list }" var="dto">
-	            <tr>
-	             <td> <img src="<%=imgPath %>${dto.getPimage() }"
-	                         width="60" height="60"> </td>
-	               <td> ${dto.getPnum() } </td>
-	               <td> ${dto.getPname() } </td>
-	               <td> <fmt:formatNumber value="${dto.getPrice() }" /> 원</td>
-	               <td>
-	                  <a href="<%=request.getContextPath() %>/admin_product_update.do?pnum=${dto.getPnum() }">수 정</a>
-	                        &nbsp;&nbsp;|&nbsp;&nbsp;
-	                  <a href="<%=request.getContextPath() %>/admin_product_delete.do?pnum=${dto.getPnum() }">삭 제</a>
-	               </td>    
-	            </tr>
-	            
-	            
-	         </c:forEach>
-	      </c:if>
-
-	
-	      <c:if test="${empty list }">
-	         <tr>
-	            <td colspan="9" align="center">
-	               <h3>등록된 상품 리스트가 없습니다.....</h3>
-	            </td>
-	         </tr>
-	      </c:if>
 	      
+	   <table class="ac" border="1" cellspacing="0" width="1600">
+
 	      <tr>
-	      	<td colspan="5">
-	      		<a href="<%=request.getContextPath() %>/admin_product_input.do">제품추가</a> 
-	      	</td>
-	      </tr>
-	   
+	         <c:forEach items="${list }" var="dto">
+	         <c:set var="count" value="${count + 1 }" />
+	             <td width="400"> <img src="<%=imgPath %>${dto.getPimage() }"
+	                         width="150" height="150"> <br>
+	                ${dto.getPnum() } <br>
+	                <h4>${dto.getPname() } <br></h4>
+	                <fmt:formatNumber value="${dto.getPrice() }" /> 원<br>
+	               
+	                  <a class="btn btn-outline-secondary" href="<%=request.getContextPath() %>/admin_product_update.do?pnum=${dto.getPnum() } ">수 정</a>
+	                        &nbsp;&nbsp;|&nbsp;&nbsp;
+	                  <a class="btn btn-outline-danger" href="<%=request.getContextPath() %>/admin_product_delete.do?pnum=${dto.getPnum() }">삭 제</a>
+	                  </td>
+	             <c:if test="${count % 4 == 0 }">
+	                 </tr>
+	                 <tr>   	            
+	            </c:if>
+	         </c:forEach>
+   
 	   </table>
+	   </c:if>
+	   
+	   <c:set var="list" value="${productListpad }" />
+	      <c:if test="${!empty list }">
+	      
+	   <table class="ac" border="1" cellspacing="0" width="1600">
+
+	      <tr>
+	         <c:forEach items="${list }" var="dto">
+	         <c:set var="count" value="${count + 1 }" />
+	             <td width="400"> <img src="<%=imgPath %>${dto.getPimage() }"
+	                         width="150" height="150"> <br>
+	                ${dto.getPnum() } <br>
+	                <h4>${dto.getPname() } <br></h4>
+	                <fmt:formatNumber value="${dto.getPrice() }" /> 원<br>
+	               
+	                  <a class="btn btn-outline-secondary" href="<%=request.getContextPath() %>/admin_product_update.do?pnum=${dto.getPnum() } ">수 정</a>
+	                        &nbsp;&nbsp;|&nbsp;&nbsp;
+	                  <a class="btn btn-outline-danger" href="<%=request.getContextPath() %>/admin_product_delete.do?pnum=${dto.getPnum() }">삭 제</a>
+	                  </td>
+	             <c:if test="${count % 4 == 0 }">
+	                 </tr>
+	                 <tr>   	            
+	            </c:if>
+	         </c:forEach>
+   
+	   </table>
+	   </c:if>
+	   
+	   <c:set var="list" value="${productListwch }" />
+	      <c:if test="${!empty list }">
+	      
+	   <table class="ac" border="1" cellspacing="0" width="1600">
+
+	      <tr>
+	         <c:forEach items="${list }" var="dto">
+	         <c:set var="count" value="${count + 1 }" />
+	             <td width="400"> <img src="<%=imgPath %>${dto.getPimage() }"
+	                         width="150" height="150"> <br>
+	                ${dto.getPnum() } <br>
+	                <h4>${dto.getPname() } <br></h4>
+	                <fmt:formatNumber value="${dto.getPrice() }" /> 원<br>
+	               
+	                  <a class="btn btn-outline-secondary" href="<%=request.getContextPath() %>/admin_product_update.do?pnum=${dto.getPnum() } ">수 정</a>
+	                        &nbsp;&nbsp;|&nbsp;&nbsp;
+	                  <a class="btn btn-outline-danger" href="<%=request.getContextPath() %>/admin_product_delete.do?pnum=${dto.getPnum() }">삭 제</a>
+	                  </td>
+	             <c:if test="${count % 4 == 0 }">
+	                 </tr>
+	                 <tr>   	            
+	            </c:if>
+	         </c:forEach>
+   
+	   </table>
+	   </c:if>
+	   
+	   <c:set var="list" value="${productListpod }" />
+	      <c:if test="${!empty list }">
+	      
+	   <table class="ac" border="1" cellspacing="0" width="1600">
+
+	      <tr>
+	         <c:forEach items="${list }" var="dto">
+	         <c:set var="count" value="${count + 1 }" />
+	             <td width="400"> <img src="<%=imgPath %>${dto.getPimage() }"
+	                         width="150" height="150"> <br>
+	                ${dto.getPnum() } <br>
+	                <h4>${dto.getPname() } <br></h4>
+	                <fmt:formatNumber value="${dto.getPrice() }" /> 원<br>
+	               
+	                  <a class="btn btn-outline-secondary" href="<%=request.getContextPath() %>/admin_product_update.do?pnum=${dto.getPnum() } ">수 정</a>
+	                        &nbsp;&nbsp;|&nbsp;&nbsp;
+	                  <a class="btn btn-outline-danger" href="<%=request.getContextPath() %>/admin_product_delete.do?pnum=${dto.getPnum() }">삭 제</a>
+	                  </td>
+
+	         </c:forEach>
+	         
+	         
+   
+	   </table>
+	   <table>
+	   <tr>
+	      	<td colspan="5">
+	      		<a class="btn btn-outline-dark" href="<%=request.getContextPath() %>/admin_product_input.do">제품추가</a> 
+	      		<br>
+	      	</td>
+
+	      </tr>
+	   </table>
+	   </c:if>
+	   
+	   
+	   <br>
 	</div>
 	
 	<%-- <div align="center">

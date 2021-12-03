@@ -7,9 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
 </head>
 <body>
-
+	<jsp:include page="../include/shop_top.jsp" />
 <div align="center">
       <hr width="100%" color="gold">
          <h3>매장 재고 관리 </h3>

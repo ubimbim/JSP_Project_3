@@ -8,7 +8,14 @@ public class ProductDTO {
 		private int price;
 		private String shop_id;
 		private int now_no;
+		private String pcont;
 		
+		public String getPcont() {
+			return pcont;
+		}
+		public void setPcont(String pcont) {
+			this.pcont = pcont;
+		}
 		public String getShop_id() {
 			return shop_id;
 		}

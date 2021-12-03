@@ -3,32 +3,65 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%
+	String imgPath = request.getContextPath()+"/upload/";
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">	
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
 
+	tr th {
+		text-align: center;
+		background: #EEEEEE;
+	}
+	
+	tr {
+		height: 60px;
+	}
+	
 	td {
 		text-align: center;
 	}
-	tr:hover {
-    background-color:#CCCCCC;
+	
+	h3 {
+		text-align: center;
+		left: 150px;
+		top: 50px;
 	}
+	
+	td a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	tr:hover {
+    	background-color:#CCCCCC;
+	}
+
 </style>
 </head>
 <body>
 <jsp:include page="../include/admin_top.jsp" />
-
 	<div align="center">
-	      <h1>3-1)매장별 재고관리 페이지(남은수량10개이하리스트)</h1>
+	      <h2>매장별 재고관리 페이지</h2>
 	   <br>
 
-	<table bgcolor="E0E0E0" border="1" cellspacing="0" width="65%">
-	      <tr bgcolor="#263343">
-	         <th>매장이름</th> <th>상품 번호</th>
-	          <th>상품 이름</th> <th>남은 수량</th>
+	<table border="0" cellspacing="0" width="800">
+			<tr>
+	         <th>매장이름</th> <th >상품 번호</th>
+	          <th >상품 이름</th> <th >남은 수량</th>
 	      </tr>
 	      
 	      <c:set var="list" value="${productcontrol }" />
@@ -56,6 +89,7 @@
 	   
 	   </table>
 	</div>
-
+	
+	<jsp:include page="../include/shop_bottom.jsp" />
 </body>
 </html>

@@ -22,7 +22,7 @@ public class BoardInsertAction implements Action {
 		
 		// 입력 폼 페이지에서 입력받은 데이터를 DB에 저장하는 비지니스 로직
 		// 첨부파일이 저장될 위치(경로)를 성정
-		String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Project\\upload";
+		String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Project\\upload";
 		
 		// 첨부파일 용량(크기) 제한 - 파일 업로드 최대 크기
 		int fileSize = 5*1024*1024;	// 5MB
@@ -59,7 +59,7 @@ public class BoardInsertAction implements Action {
 		
 		if(res>0) {
 			forward.setRedirect(true);
-			forward.setPath("board_list.do");
+			forward.setPath("admin_board_list.do");
 		} else {
 			out.println("<script>");
 			out.println("alert('공지사항 등록 실패')");

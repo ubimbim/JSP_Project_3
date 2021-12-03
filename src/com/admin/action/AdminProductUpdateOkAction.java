@@ -17,7 +17,7 @@ public class AdminProductUpdateOkAction implements Action {
 
 	@Override
 		public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-			String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Project\\upload";
+			String saveFolder = "C:\\NCS\\workspace(jsp)\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Project\\upload";
 			int fileSize = 5 * 1024 * 1024;
 			MultipartRequest multi = new MultipartRequest(
 					request, 
@@ -30,6 +30,7 @@ public class AdminProductUpdateOkAction implements Action {
 			String pnum = multi.getParameter("pnum").trim();
 			String pname = multi.getParameter("pname").trim();
 			int price = Integer.parseInt(multi.getParameter("price").trim());
+			String pcont = multi.getParameter("pcont").trim();
 			
 			if(pimage_New == null) {  // 새로운 첨부파일 이미지가 없는 경우
 				pimage_New = multi.getParameter("pimage_Old");
@@ -40,6 +41,7 @@ public class AdminProductUpdateOkAction implements Action {
 			dto.setPnum(pnum);
 			dto.setPname(pname);
 			dto.setPrice(price);
+			dto.setPcont(pcont);
 			
 			ProductDAO dao = ProductDAO.getInstance();
 			int check = dao.updateProduct(dto);
